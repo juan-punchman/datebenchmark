@@ -1,0 +1,5 @@
+_bld
+.idea/
+cmake-build-*
+tzdb
+_bld_win

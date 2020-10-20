@@ -1,0 +1,93 @@
+---
+Language:        Cpp
+BasedOnStyle:  WebKit
+AccessModifierOffset: -2
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignEscapedNewlines: Right
+AlignOperands: true
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakAfterReturnType: TopLevelDefinitions # switch to RTBS_TopLevel ?
+AlwaysBreakTemplateDeclarations: false
+AlwaysBreakBeforeMultilineStrings: false
+BinPackParameters: false
+BinPackArguments: false
+# Allman breaks also after namespaces... yek
+#BreakBeforeBraces: Stroustrup
+BreakBeforeBraces: Allman
+# the following requires clang-format 3.8
+# run "brew update; brew upgrade; brew cleanup" to pull the latest clang-format
+BreakBeforeBraces: Custom
+BraceWrapping:
+   IndentBraces:          false
+   AfterNamespace:        false
+   AfterClass:            true
+   AfterControlStatement: true
+   AfterEnum:             true
+   AfterFunction:         true
+   AfterStruct:           true
+   AfterUnion:            true
+   BeforeCatch:           true
+   BeforeElse:            true
+BreakBeforeBinaryOperators: All
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializersBeforeComma: true
+ColumnLimit:     0
+CommentPragmas:  '^ IWYU pragma:'
+ConstructorInitializerAllOnOneLineOrOnePerLine: false #true
+ConstructorInitializerIndentWidth: 0
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: false
+DerivePointerAlignment: false
+DisableFormat:   false
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+ForEachMacros:   [ foreach, Q_FOREACH, BOOST_FOREACH ]
+#IncludeBlocks: Regroup
+#IncludeCategories: # TODO
+#IncludeIsMainRegex: # TODO
+IndentCaseLabels: false
+IndentPPDirectives: None
+# IndentPPDirectives: AfterHash
+IndentWrappedFunctionNames: false
+IndentWidth:     4
+IndentFunctionDeclarationAfterType: false
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 3
+#MaxEmptyLinesToKeep: 1 # I prefer this, but hey what is an extra empty line or two...
+#NamespaceIndentation: None
+#NamespaceIndentation: Inner # or All
+NamespaceIndentation: All
+ObjCSpaceAfterProperty: true
+ObjCSpaceBeforeProtocolList: true
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 300
+PenaltyBreakString: 1000
+PenaltyBreakFirstLessLess: 120
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 60
+PointerAlignment: Left
+#SortIncludes: true # TODO
+#SortUsingDeclarations: true # TODO
+SpaceAfterCStyleCast: false
+SpaceBeforeAssignmentOperators: true
+#SpaceBeforeCpp11BracedList: false # TODO figure why this gives an error should be available...
+SpaceBeforeParens: Never
+#SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles:  false
+SpacesInContainerLiterals: true
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: true
+SpacesInSquareBrackets: false
+Standard:        Cpp11
+TabWidth:        8
+UseTab:          Never
+...

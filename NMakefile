@@ -1,0 +1,39 @@
+# attempt at NMake file 
+
+CURL_ROOT_DIR="C:\\ProgramData\\chocolatey\\lib\\curl\\tools\\curl-7.72.0-win64-mingw"
+CMAKE_BUILD_DIR=_bld_win
+
+# .PHONY: gen          # setup build configuration
+gen:
+	(cmake -G "Visual Studio 14 2015 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DCMAKE_CXX_STANDARD=11 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+# microsoft name is totally fuckedup, off course....
+# (cmake -G "Visual Studio 14 2015 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DCMAKE_CXX_STANDARD=17 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+# (cmake -G "Visual Studio 16 2019 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DCMAKE_CXX_STANDARD=11 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+# (cmake -G "Visual Studio 16 2019 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DCMAKE_CXX_STANDARD=17 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+
+# .PHONY: gen2         # setup build configuration using internal tzdb instead of the one provided by date lib
+gen2:
+	(cmake -G "Visual Studio 14 2015 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DUSE_SYSTEM_TZ_DB=ON -DCMAKE_CXX_STANDARD=11 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+# (cmake -G "Visual Studio 14 2015 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DUSE_SYSTEM_TZ_DB=ON -DCMAKE_CXX_STANDARD=17 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+# (cmake -G "Visual Studio 16 2019 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DUSE_SYSTEM_TZ_DB=ON -DCMAKE_CXX_STANDARD=11 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+# (cmake -G "Visual Studio 16 2019 Win64" -H. -B$(CMAKE_BUILD_DIR) -DBUILD_TZ_LIB=ON -DUSE_SYSTEM_TZ_DB=ON -DCMAKE_CXX_STANDARD=17 -DCURL_INCLUDE_DIR=$(CURL_ROOT_DIR)\\include  -DCURL_LIBRARY=$(CURL_ROOT_DIR)\\lib\\libcurl.a)
+
+# .PHONY: bld          # build tests
+bld: gen
+	(cmake --build $(CMAKE_BUILD_DIR))
+
+# .PHONY: bld2         # build tests using internal tzdb instead of the one provided by date lib
+bld2: gen2
+	(cmake --build $(CMAKE_BUILD_DIR))
+
+# .PHONY: test         # run tests
+test: bld
+	$(CMAKE_BUILD_DIR)/test/date.benchmark.exe
+
+# .PHONY: test2        # run tests using internal tzdb instead of the one provided by date lib
+test2: bld2
+	$(CMAKE_BUILD_DIR)/test/date.benchmark.exe
+
+# .PHONY: cln          # clean current build environment
+cln:
+	del /f $(CMAKE_BUILD_DIR)
